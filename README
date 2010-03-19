@@ -6,7 +6,7 @@ with an identifier (ie. a FIPS code or state abbreviation) and an associated
 count (ie. number of bars, number of sex offenders, unemployment, etc ) you
 can quickly and easily generate a map like the one shown here:
 
-<a href="http://flowingdata.com/2009/11/04/unemployment-2004-to-present-the-country-is-bleeding/">Unemployment Choropleth Map</a>
+http://flowingdata.com/2009/11/04/unemployment-2004-to-present-the-country-is-bleeding/
 
 Which, incidentally, is what inspired this script in the first place.
 
