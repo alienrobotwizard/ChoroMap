@@ -15,7 +15,10 @@ h2. USAGE:
 </code></pre>
 
 
-Where it is assumed your <datafile> has rows that look like: <identifier> "\t" <count>
-and <identifier> is a county code or state abbreviation depending on whether <map> is
-"usa" or "counties"
+Where it is assumed your "datafile" has rows that look like:
+
+"identifier" "\t" "count"
+
+and identifier is a county code or state abbreviation depending on whether "map" is
+"usa" or "counties". See sample data.
 
