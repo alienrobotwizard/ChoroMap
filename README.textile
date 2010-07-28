@@ -22,3 +22,23 @@ Where it is assumed your "datafile" has rows that look like:
 and identifier is a county code or state abbreviation depending on whether "map" is
 "usa" or "counties". See sample data.
 
+h3. Using the Geo to FIPS utility
+
+Wait! But my data doesn't have fips codes in it! All I've got are these stupid (lat,lon,count) tuples!
+
+If, instead of "fips" "\t" "count", you have "lat" "\t" "lon" "\t" "count" don't get frustrated just yet. There's a script for that.
+From the command line:
+
+<pre><code>
+    cat /your/data/file | bin/geo_to_county_streamer.rb --map | sort | bin/geo_to_county_streamer.rb --reduce > happy_datafile.tsv
+</code></pre>
+
+OR if you have a HUGE datafile you can run it in Hadoop mode. Of course, this is assuming you've got a Hadoop cluster lying around,
+which, frankly, you should if you have HUGE data.
+
+<pre><code>
+    bin/geo_to_county_streamer.rb --rm --run /input/data/file /output/datafile
+</code></pre>
+
+
+The output is then ready to use with ChoroMap.

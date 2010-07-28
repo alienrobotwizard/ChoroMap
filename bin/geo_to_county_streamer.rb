@@ -21,7 +21,7 @@ class FipsFromGeoMapper < Wukong::Streamer::RecordStreamer
 
   def initialize *args
     super *args
-    @geo_2_fips = Geo2County.new('data/fips_to_geo')
+    @geo_2_fips = Geo2County.new('../data/fips_to_geo')
   end
   
   def process lat, lon, *_, &blk
