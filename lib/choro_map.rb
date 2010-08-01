@@ -10,6 +10,7 @@ class Choromap
     @counts = {}
     @colors = hex_color_array(options[:color_scheme])
     read(filename)
+    scale_data
   end
 
   #
@@ -36,6 +37,18 @@ class Choromap
     @svg_map.display
   end
 
+  #
+  # Just need 7 bins
+  #
+  def scale_data
+    n_bins  = 6.0
+    raw_min = Math.log(counts.values.min)
+    raw_max = Math.log(counts.values.max)
+    slope  = n_bins / (raw_max - raw_min).to_f
+    counts.each do |k, raw_value|
+      @counts[k] = (slope*(Math.log(raw_value) - raw_min)).to_i # make it an integer bin
+    end
+  end
   
   #
   # Color themes direct from colorbrewer2.org
@@ -62,26 +75,7 @@ class Choromap
       count = counts[path['id']]
       count ||= 0
       next if ignore_paths.include? path['id']
-      #
-      # Brittle, change binning manually...
-      #
-      if count > 12
-        color_lvl = 6
-      elsif count > 10
-        color_lvl = 5
-      elsif count > 6
-        color_lvl = 4
-      elsif count > 4
-        color_lvl = 3
-      elsif count > 2
-        color_lvl = 2
-      elsif count > 0
-        color_lvl = 1
-      else
-        color_lvl = 0
-      end
-      #
-      color         = colors[color_lvl]
+      color         = colors[count]
       path['style'] = path_style + color
     end
   end
