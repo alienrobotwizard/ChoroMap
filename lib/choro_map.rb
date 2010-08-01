@@ -42,9 +42,9 @@ class Choromap
   #
   def scale_data
     n_bins  = 6.0
-    raw_min = Math.log(counts.values.min)
-    raw_max = Math.log(counts.values.max)
-    slope  = n_bins / (raw_max - raw_min).to_f
+    raw_min = Math.log(counts.values.min)      rescue 0.0 # if min == 0, log(min) = -inf = BAD juju
+    raw_max = Math.log(counts.values.max)      rescue 0.0 # if max == 0, log(max) = -inf = BAD juju
+    slope  = n_bins / (raw_max - raw_min).to_f rescue 0.0 # wouldn't want inf here, zero is fine
     counts.each do |k, raw_value|
       @counts[k] = (slope*(Math.log(raw_value) - raw_min)).to_i # make it an integer bin
     end
